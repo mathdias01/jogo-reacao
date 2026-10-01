@@ -96,9 +96,9 @@ desafiador: {
 
     quantidadeMaxima: 5,
 
-    tempoBotao: 5000,
+    tempoBotao: 4000,
 
-    intervaloRodada: 4500,
+    intervaloRodada: 3500,
 
     cores: [
         "#ff1744",
