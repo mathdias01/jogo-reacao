@@ -129,6 +129,92 @@ extremo: {
         "#ffe600"
     ]
 
+},
+
+cores: {
+
+    quantidadeMinima: 3,
+
+    quantidadeMaxima: 4,
+
+    tipos: [
+
+        {
+            nome: "azul",
+            cor: "#2196f3",
+            pontos: 1,
+            tempo: 3000,
+            chance: 30
+        },
+
+        {
+            nome: "vermelho",
+            cor: "#f44336",
+            pontos: 2,
+            tempo: 2700,
+            chance: 22
+        },
+
+        {
+            nome: "roxo",
+            cor: "#9c27b0",
+            pontos: 5,
+            tempo: 2400,
+            chance: 16
+        },
+
+        {
+            nome: "rosa",
+            cor: "#ff4081",
+            pontos: 10,
+            tempo: 2100,
+            chance: 11
+        },
+
+        {
+            nome: "verde",
+            cor: "#4caf50",
+            pontos: 15,
+            tempo: 1800,
+            chance: 8
+        },
+
+        {
+            nome: "ciano",
+            cor: "#00e5ff",
+            pontos: 20,
+            tempo: 1550,
+            chance: 5
+        },
+
+        {
+            nome: "branco",
+            cor: "#ffffff",
+            pontos: 50,
+            tempo: 1300,
+            chance: 4
+        },
+
+        {
+            nome: "cinza",
+            cor: "#777777",
+            pontos: 100,
+            tempo: 1050,
+            chance: 2.5
+        },
+
+        {
+            nome: "preto",
+            cor: "#111111",
+            pontos: 150,
+            tempo: 800,
+            chance: 1.5
+        }
+
+    ],
+
+    intervaloRodada: 900
+
 }
 
 };
@@ -259,7 +345,9 @@ function atualizarIndicador() {
 
         desafiador: "Desafiador",
 
-        extremo: "Extremo"
+        extremo: "Extremo",
+
+        cores: "Caça às Cores"
 
     };
 
@@ -280,6 +368,53 @@ function criarRodada() {
     }
 
     removerBotoesAtuais();
+
+    if (dificuldade === "cores") {
+
+    const configuracao =
+        configuracoes.cores;
+
+    const quantidade =
+        Math.floor(
+            Math.random() *
+            (
+                configuracao.quantidadeMaxima -
+                configuracao.quantidadeMinima +
+                1
+            )
+        )
+        +
+        configuracao.quantidadeMinima;
+
+    const posicoes = [];
+
+    for (
+        let i = 0;
+        i < quantidade;
+        i++
+    ) {
+
+        const botao =
+            criarBotaoPorCor(posicoes);
+
+        areaJogo.appendChild(botao);
+
+    }
+
+    proximaRodada =
+        setTimeout(function () {
+
+            if (jogoAtivo) {
+
+                criarRodada();
+
+            }
+
+        }, configuracao.intervaloRodada);
+
+    return;
+
+}
 
     const configuracao =
         configuracoes[dificuldade];
@@ -369,6 +504,148 @@ function criarRodada() {
 /* ================================================= */
 /* ================= CRIAR BOTÃO =================== */
 /* ================================================= */
+function criarBotaoPorCor(posicoes) {
+
+    const configuracao =
+        configuracoes.cores;
+
+    const botao =
+        document.createElement("button");
+
+    botao.className =
+        "botao-reacao";
+
+    botao.type = "button";
+
+
+    /* ================= ESCOLHER COR ================= */
+
+    let numero =
+        Math.random() * 100;
+
+    let tipoEscolhido =
+        configuracao.tipos[0];
+
+
+    for (
+        const tipo of configuracao.tipos
+    ) {
+
+        if (numero < tipo.chance) {
+
+            tipoEscolhido = tipo;
+
+            break;
+
+        }
+
+        numero -= tipo.chance;
+
+    }
+
+
+    /* ================= VISUAL ================= */
+
+    botao.style.background =
+        criarGradiente(
+            tipoEscolhido.cor
+        );
+
+    botao.style.color =
+        tipoEscolhido.cor;
+
+    botao.style.boxShadow = `
+        0 0 10px ${tipoEscolhido.cor},
+        inset 0 0 8px rgba(255,255,255,0.3)
+    `;
+
+
+    /* ================= PONTUAÇÃO ================= */
+
+    botao.dataset.pontos =
+        tipoEscolhido.pontos;
+
+
+    /* ================= POSIÇÃO ================= */
+
+    const posicao =
+        encontrarPosicao(posicoes);
+
+    botao.style.left =
+        posicao.x + "px";
+
+    botao.style.top =
+        posicao.y + "px";
+
+    posicoes.push(posicao);
+
+
+    /* ================= CLIQUE ================= */
+
+    botao.addEventListener(
+        "click",
+        function () {
+
+            if (!jogoAtivo) {
+                return;
+            }
+
+            pontos +=
+                Number(
+                    botao.dataset.pontos
+                );
+
+            atualizarPontuacao();
+
+            botao.classList.add(
+                "sumindo"
+            );
+
+            setTimeout(function () {
+
+                if (botao.parentElement) {
+
+                    botao.remove();
+
+                }
+
+            }, 250);
+
+        }
+    );
+
+
+    /* ================= DESAPARECER ================= */
+
+    setTimeout(function () {
+
+        if (
+            jogoAtivo &&
+            botao.parentElement
+        ) {
+
+            botao.classList.add(
+                "sumindo"
+            );
+
+            setTimeout(function () {
+
+                if (botao.parentElement) {
+
+                    botao.remove();
+
+                }
+
+            }, 250);
+
+        }
+
+    }, tipoEscolhido.tempo);
+
+
+    return botao;
+
+}
 
 function criarBotao(posicoes) {
 
