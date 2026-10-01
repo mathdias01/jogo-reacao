@@ -90,15 +90,15 @@ const configuracoes = {
     },
 
 
-    desafiador: {
+desafiador: {
 
     quantidadeMinima: 3,
 
     quantidadeMaxima: 5,
 
-    tempoBotao: 900,
+    tempoBotao: 1500,
 
-    intervaloRodada: 650,
+    intervaloRodada: 1100,
 
     cores: [
         "#ff1744",
@@ -377,10 +377,9 @@ function criarBotao(posicoes) {
         cor;
 
     botao.style.boxShadow = `
-        0 0 12px ${cor},
-        0 0 30px ${cor},
-        inset 0 0 12px rgba(255,255,255,0.35)
-    `;
+    0 0 10px ${cor},
+    inset 0 0 8px rgba(255,255,255,0.3)
+`;
 
 
     const posicao =
