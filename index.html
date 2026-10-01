@@ -1,52 +1,146 @@
 <!DOCTYPE html>
-<html lang="Pt-br">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de reação</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+    <title>Jogo de Reação</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-   
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@300..700&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div id="app">
+
+        <!-- ================= MENU ================= -->
+
         <div id="tela-menu">
+
+            <div class="particula particula1"></div>
+            <div class="particula particula2"></div>
+            <div class="particula particula3"></div>
+            <div class="particula particula4"></div>
+
+            <div class="particulas-pequenas">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <div id="painel-menu">
-                
+
                 <h1>Jogo de Reação</h1>
 
-                <button class="botao-dificuldade" data-dificuldade="facil">
+                <p class="subtitulo-menu">
+                    Teste sua velocidade!
+                </p>
+
+                <button
+                    class="botao-dificuldade"
+                    data-dificuldade="facil"
+                >
                     Fácil
                 </button>
 
-                <button class="botao-dificuldade" data-dificuldade="normal">
+                <button
+                    class="botao-dificuldade"
+                    data-dificuldade="normal"
+                >
                     Normal
                 </button>
 
-                <button class="botao-dificuldade" data-dificuldade="desafiador">
+                <button
+                    class="botao-dificuldade"
+                    data-dificuldade="desafiador"
+                >
                     Desafiador
                 </button>
-                
+
             </div>
+
         </div>
+
+
+        <!-- ================= JOGO ================= -->
 
         <div id="tela-jogo" class="escondido">
 
+            <div id="interface-jogo">
+
+                <div id="pontuacao">
+                    Pontos: 0
+                </div>
+
+                <div id="cronometro">
+                    30
+                </div>
+
+                <div id="indicador-dificuldade">
+                    Fácil
+                </div>
+
+                <div id="area-jogo"></div>
+
+            </div>
+
         </div>
+
+
+        <!-- ================= RESULTADO ================= -->
 
         <div id="tela-resultado" class="escondido">
 
-        </div>
+            <div id="painel-resultado">
 
+                <div class="icone-resultado">
+                    ★
+                </div>
+
+                <h2>Fim de jogo!</h2>
+
+                <p id="mensagem-resultado">
+                    Muito bem!
+                </p>
+
+                <div id="pontuacao-final">
+                    Pontuação: 0
+                </div>
+
+                <div id="botoes-resultado">
+
+                    <button id="botao-tentar-novamente">
+                        Tentar novamente
+                    </button>
+
+                    <button id="botao-voltar-menu">
+                        Voltar ao menu
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
     <script src="script.js"></script>
+
 </body>
+
 </html>
