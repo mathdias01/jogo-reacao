@@ -138,80 +138,16 @@ cores: {
     quantidadeMaxima: 4,
 
     tipos: [
-
-        {
-            nome: "azul",
-            cor: "#2196f3",
-            pontos: 1,
-            tempo: 3000,
-            chance: 30
-        },
-
-        {
-            nome: "vermelho",
-            cor: "#f44336",
-            pontos: 2,
-            tempo: 2700,
-            chance: 22
-        },
-
-        {
-            nome: "roxo",
-            cor: "#9c27b0",
-            pontos: 5,
-            tempo: 2400,
-            chance: 16
-        },
-
-        {
-            nome: "rosa",
-            cor: "#ff4081",
-            pontos: 10,
-            tempo: 2100,
-            chance: 11
-        },
-
-        {
-            nome: "verde",
-            cor: "#4caf50",
-            pontos: 15,
-            tempo: 1800,
-            chance: 8
-        },
-
-        {
-            nome: "ciano",
-            cor: "#00e5ff",
-            pontos: 20,
-            tempo: 1550,
-            chance: 5
-        },
-
-        {
-            nome: "branco",
-            cor: "#ffffff",
-            pontos: 50,
-            tempo: 1300,
-            chance: 4
-        },
-
-        {
-            nome: "cinza",
-            cor: "#777777",
-            pontos: 100,
-            tempo: 1050,
-            chance: 2.5
-        },
-
-        {
-            nome: "preto",
-            cor: "#111111",
-            pontos: 150,
-            tempo: 800,
-            chance: 1.5
-        }
-
-    ],
+    { nome: "azul",    cor: "#2196f3", pontos: 1,   tempo: 1800, chance: 30 },
+    { nome: "vermelho",cor: "#f44336", pontos: 2,   tempo: 1600, chance: 22 },
+    { nome: "roxo",    cor: "#9c27b0", pontos: 5,   tempo: 1400, chance: 16 },
+    { nome: "rosa",    cor: "#ff4081", pontos: 10,  tempo: 1200, chance: 11 },
+    { nome: "verde",   cor: "#4caf50", pontos: 15,  tempo: 1000, chance: 8 },
+    { nome: "ciano",   cor: "#00e5ff", pontos: 20,  tempo: 850,  chance: 5 },
+    { nome: "branco",  cor: "#ffffff", pontos: 50,  tempo: 700,  chance: 4 },
+    { nome: "cinza",   cor: "#777777", pontos: 100, tempo: 550,  chance: 2.5 },
+    { nome: "preto",   cor: "#111111", pontos: 150, tempo: 400, chance: 1.5 }
+],
 
     intervaloRodada: 900
 
@@ -367,59 +303,51 @@ function criarRodada() {
         return;
     }
 
-    removerBotoesAtuais();
+
+    /* ================= CAÇA ÀS CORES ================= */
 
     if (dificuldade === "cores") {
 
-    const configuracao =
-        configuracoes.cores;
+        const configuracao = configuracoes.cores;
 
-    const quantidade =
-        Math.floor(
-            Math.random() *
-            (
-                configuracao.quantidadeMaxima -
-                configuracao.quantidadeMinima +
-                1
-            )
-        )
-        +
-        configuracao.quantidadeMinima;
+        const quantidade =
+            Math.floor(
+                Math.random() *
+                (
+                    configuracao.quantidadeMaxima -
+                    configuracao.quantidadeMinima +
+                    1
+                )
+            ) +
+            configuracao.quantidadeMinima;
 
-    const posicoes = [];
+        const posicoes = [];
 
-    for (
-        let i = 0;
-        i < quantidade;
-        i++
-    ) {
+        for (let i = 0; i < quantidade; i++) {
 
-        const botao =
-            criarBotaoPorCor(posicoes);
+            const botao =
+                criarBotaoPorCor(posicoes);
 
-        areaJogo.appendChild(botao);
+            areaJogo.appendChild(botao);
 
+        }
+
+        proximaRodada =
+            setTimeout(function () {
+
+                if (jogoAtivo) {
+                    criarRodada();
+                }
+
+            }, 1200);
+
+        return;
     }
 
-    proximaRodada =
-        setTimeout(function () {
 
-            if (jogoAtivo) {
+    /* ================= OUTROS MODOS ================= */
 
-                criarRodada();
-
-            }
-
-        }, configuracao.intervaloRodada);
-
-    return;
-
-}
-
-    const configuracao =
-        configuracoes[dificuldade];
-
-    let quantidade;
+    removerBotoesAtuais();
 
 
     /* ================= FÁCIL ================= */
