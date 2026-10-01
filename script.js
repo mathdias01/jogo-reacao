@@ -109,6 +109,28 @@ desafiador: {
     ]
 
 },
+
+extremo: {
+
+    quantidadeMinima: 4,
+
+    quantidadeMaxima: 7,
+
+    tempoBotao: 1600,
+
+    intervaloRodada: 1300,
+
+    cores: [
+        "#ff1744",
+        "#ff00cc",
+        "#7c4dff",
+        "#00e5ff",
+        "#39ff14",
+        "#ffe600"
+    ]
+
+}
+
 };
 
 
@@ -235,7 +257,9 @@ function atualizarIndicador() {
 
         normal: "Normal",
 
-        desafiador: "Desafiador"
+        desafiador: "Desafiador",
+
+        extremo: "Extremo"
 
     };
 
